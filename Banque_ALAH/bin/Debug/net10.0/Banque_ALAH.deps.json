@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Banque_ALAH/1.0.0": {
+        "runtime": {
+          "Banque_ALAH.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Banque_ALAH/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
