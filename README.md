@@ -8,7 +8,7 @@
 **Enseignement:** .NET  
 **Chargé de Cours:** E. H. Ousmane Diallo  
 **Année Universitaire:** 2025/2026  
-**Date:** 8 décembre 2026
+**Date:** 8 janvier 2025
 
 ---
 
@@ -21,7 +21,9 @@ Ce projet implémente un système de gestion de comptes bancaires en C# avec une
 - ✅ Gestion de compte bancaire (Débiter, Créditer)
 - ✅ Virement entre comptes
 - ✅ Gestion des exceptions et validations
-- ✅ Suite de tests unitaires complète (10 tests)
+- ✅ Suite de tests unitaires complète (27 tests)
+- ✅ Tests du constructeur
+- ✅ Tests d'opérations mixtes
 
 ---
 
@@ -29,13 +31,17 @@ Ce projet implémente un système de gestion de comptes bancaires en C# avec une
 
 ```
 ProjetBanque/
-├── Banque.sln                          # Solution principale
-├── BanqueXXXX/                         # Bibliothèque de classes
-│   ├── BanqueXXXX.csproj
+├── Banque.slnx                         # Solution principale
+├── Banque_ALAH/                        # Bibliothèque de classes
+│   ├── Banque_ALAH.csproj
 │   └── CompteBancaire.cs               # Classe métier
 ├── BanqueTests/                        # Projet de tests unitaires
 │   ├── BanqueTests.csproj
-│   └── CompteBancaireTests.cs          # Tests unitaires
+│   ├── CompteBancaireConstructeurTests.cs    # Tests du constructeur
+│   ├── CompteBancaireCrediterTests.cs        # Tests de crédit
+│   ├── CompteBancaireDebiterTests.cs         # Tests de débit
+│   ├── CompteBancaireVirementTests.cs        # Tests de virement
+│   └── CompteBancaireTests.cs                # Tests d'opérations mixtes
 └── README.md                           # Ce fichier
 ```
 
@@ -45,7 +51,7 @@ ProjetBanque/
 
 ### Prérequis
 
-- .NET SDK 8.0 ou supérieur
+- .NET SDK 10.0 ou supérieur
 - Visual Studio Code (ou Visual Studio)
 - Extension C# Dev Kit pour VS Code
 
@@ -92,34 +98,57 @@ dotnet test --logger "console;verbosity=detailed"
 
 ### Couverture des tests
 
-Le projet contient **10 tests unitaires** couvrant les scénarios suivants :
+Le projet contient **27 tests unitaires** organisés en plusieurs classes de tests :
 
-#### Tests de la méthode `Débiter` (3 tests)
+#### Tests du constructeur (4 tests)
 
-1. ✅ `VérifierDébitCompteCorrect` - Vérifie qu'un montant valide est correctement débité
-2. ✅ `DébiterMontantNégatifSoulèveApplicationException` - Vérifie qu'un montant négatif lève une exception
-3. ✅ `DébiterMontantSupérieurAuSoldeSoulèveArgumentOutOfRangeException` - Vérifie qu'un montant supérieur au solde lève une exception
+1. ✅ `ConstructeurAvecSoldePositif` - Vérifie la création avec un solde positif
+2. ✅ `ConstructeurAvecSoldeZéro` - Vérifie la création avec un solde à zéro
+3. ✅ `ConstructeurAvecSoldeNégatif` - Vérifie la création avec un solde négatif
+4. ✅ `ConstructeurAvecNomClientVide` - Vérifie la création avec un nom vide
 
-#### Tests de la méthode `Créditer` (3 tests)
+#### Tests de la méthode `Débiter` (7 tests)
 
-4. ✅ `VérifierCréditCompteCorrect` - Vérifie qu'un montant valide est correctement crédité
-5. ✅ `CréditerMontantNégatifSoulèveArgumentOutOfRangeException` - Vérifie qu'un montant négatif lève une exception
-6. ✅ `CréditerMontantZéroSoulèveArgumentOutOfRangeException` - Vérifie qu'un montant zéro lève une exception
+5. ✅ `VérifierDébitCompteCorrect` - Vérifie qu'un montant valide est correctement débité
+6. ✅ `DébiterMontantNégatifSoulèveApplicationException` - Vérifie qu'un montant négatif lève une exception
+7. ✅ `DébiterMontantSupérieurAuSoldeSoulèveArgumentOutOfRangeException` - Vérifie qu'un montant supérieur au solde lève une exception
+8. ✅ `DébiterMontantZéroSoulèveApplicationException` - Vérifie qu'un montant zéro lève une exception
+9. ✅ `DébiterMontantÉgalAuSoldeRéussit` - Vérifie qu'un débit égal au solde fonctionne
+10. ✅ `DébiterSoldeInitialZéroSoulèveArgumentOutOfRangeException` - Vérifie qu'un débit sur un compte à zéro lève une exception
+11. ✅ `DébiterPlusieursFoisConsécutives` - Vérifie plusieurs débits consécutifs
 
-#### Tests de la méthode `Virement` (4 tests)
+#### Tests de la méthode `Créditer` (6 tests)
 
-7. ✅ `VirementCorrect` - Vérifie qu'un virement valide s'exécute correctement
-8. ✅ `VirementMontantNégatifSoulèveException` - Vérifie qu'un montant négatif lève une exception
-9. ✅ `VirementSoldeInsuffisantSoulèveException` - Vérifie qu'un solde insuffisant lève une exception
-10. ✅ `VirementCompteNullSoulèveException` - Vérifie qu'un compte null lève une exception
+12. ✅ `VérifierCréditCompteCorrect` - Vérifie qu'un montant valide est correctement crédité
+13. ✅ `CréditerMontantNégatifSoulèveArgumentOutOfRangeException` - Vérifie qu'un montant négatif lève une exception
+14. ✅ `CréditerMontantZéroSoulèveArgumentOutOfRangeException` - Vérifie qu'un montant zéro lève une exception
+15. ✅ `CréditerPlusieursFoisConsécutives` - Vérifie plusieurs crédits consécutifs
+16. ✅ `CréditerSoldeInitialZéro` - Vérifie le crédit sur un compte à zéro
+17. ✅ `CréditerMontantTrèsPetit` - Vérifie le crédit d'un montant très petit
+
+#### Tests de la méthode `Virement` (8 tests)
+
+18. ✅ `VirementCorrect` - Vérifie qu'un virement valide s'exécute correctement
+19. ✅ `VirementMontantNégatifSoulèveException` - Vérifie qu'un montant négatif lève une exception
+20. ✅ `VirementSoldeInsuffisantSoulèveException` - Vérifie qu'un solde insuffisant lève une exception
+21. ✅ `VirementCompteNullSoulèveException` - Vérifie qu'un compte null lève une exception
+22. ✅ `VirementMontantZéroSoulèveException` - Vérifie qu'un montant zéro lève une exception
+23. ✅ `VirementMontantÉgalAuSoldeRéussit` - Vérifie qu'un virement égal au solde fonctionne
+24. ✅ `VirementMultipleEntreComptes` - Vérifie plusieurs virements entre différents comptes
+25. ✅ `VirementMontantTrèsPetit` - Vérifie le virement d'un montant très petit
+
+#### Tests d'opérations mixtes (2 tests)
+
+26. ✅ `OpérationsMixtesCréditEtDébit` - Vérifie une séquence d'opérations crédit/débit
+27. ✅ `VirementSuiviDeCréditEtDébit` - Vérifie un virement suivi d'opérations
 
 ### Résultats attendus
 
 Tous les tests doivent passer avec succès :
 
 ```
-Total tests: 10
-     Passed: 10
+Total tests: 27
+     Passed: 27
      Failed: 0
     Skipped: 0
 ```
@@ -196,9 +225,9 @@ public void VérifierDébitCompteCorrect()
 
 ## 🛠️ Technologies utilisées
 
-- **Langage:** C# 12
-- **Framework:** .NET 8.0
-- **Framework de tests:** MSTest
+- **Langage:** C# (version latest)
+- **Framework:** .NET 10.0
+- **Framework de tests:** MSTest 4.0.1
 - **IDE recommandé:** Visual Studio Code / Visual Studio 2022
 
 ---
@@ -239,11 +268,20 @@ Avant de soumettre le projet, assurez-vous que :
 - [x] Le code compile sans erreur (`dotnet build`)
 - [x] Tous les tests passent (`dotnet test`)
 - [x] Le bug intentionnel a été corrigé
-- [x] Les 10 tests unitaires sont implémentés
-- [x] Le README.md est complet
+- [x] Les 27 tests unitaires sont implémentés
+- [x] Le README.md est complet et à jour
 - [x] Le projet est poussé sur GitHub
 - [x] Le lien GitHub a été partagé avec le professeur
 
 ---
 
-*Dernière mise à jour : 8 décembre 2026*
+## 📌 Notes importantes
+
+- Le projet utilise .NET 10.0 comme framework cible
+- La classe `CompteBancaire` gère les comptes bloqués via un champ privé `_bloqué`
+- Les méthodes `BloquerCompte()` et `DéBloquerCompte()` sont privées
+- Le bug intentionnel dans la méthode `Débiter` a été corrigé (utilisation de `-=` au lieu de `+=`)
+
+---
+
+*Dernière mise à jour : 8 janvier 2025*
