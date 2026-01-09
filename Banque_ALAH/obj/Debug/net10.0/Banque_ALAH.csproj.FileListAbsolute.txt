@@ -9,3 +9,4 @@ C:\Users\HP ZBOOK\Desktop\ProjetBanque\Banque_ALAH\obj\Debug\net10.0\Banque_ALAH
 C:\Users\HP ZBOOK\Desktop\ProjetBanque\Banque_ALAH\obj\Debug\net10.0\refint\Banque_ALAH.dll
 C:\Users\HP ZBOOK\Desktop\ProjetBanque\Banque_ALAH\obj\Debug\net10.0\Banque_ALAH.pdb
 C:\Users\HP ZBOOK\Desktop\ProjetBanque\Banque_ALAH\obj\Debug\net10.0\ref\Banque_ALAH.dll
+C:\Users\HP ZBOOK\Desktop\ProjetBanque\Banque_ALAH\obj\Debug\net10.0\Banque_ALAH.sourcelink.json
